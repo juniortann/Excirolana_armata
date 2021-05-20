@@ -26,10 +26,10 @@ function [prdData, info] = predict_Excirolana_armata(par, data, auxData)
   aT_p = t_p/ kT_M;                 % d, age at puberty at f and T
 
   % ultimate
-  l_i = f_Li - l_T;                    % -, scaled ultimate length at f
+  l_i = f - l_T;                    % -, scaled ultimate length at f
   L_i = L_m * l_i;                  % cm, ultimate structural length at f
   Lw_i = L_i/ del_M;                % cm, ultimate physical length at f
-  Ww_i = L_i^3 * (1 + f_Li * w);       % g, ultimate wet weight (remove d_V for wet weight)
+  Ww_i = L_i^3 * (1 + f * w);       % g, ultimate wet weight (remove d_V for wet weight)
  
   % reproduction
   pars_R = [kap; kap_R; g; k_J; k_M; L_T; v; U_Hb; U_Hp]; % compose parameter vector at T
@@ -55,8 +55,8 @@ function [prdData, info] = predict_Excirolana_armata(par, data, auxData)
   
   %% uni-variate data
   % time-length
-  [t_p, t_b, l_p, l_b] = get_tp(pars_tp, f_tL);
-  r_B = k_M/ 3/ (1 + f_tL/ g);  L_i = L_m * f_tL; L_b = L_m * l_b;      
+  [t_p, t_b, l_p, l_b] = get_tp(pars_tp, f);
+  r_B = k_M/ 3/ (1 + f/ g);  L_i = L_m * f; L_b = L_m * l_b;      
   [t L] = ode45(@get_L, tL(:,1), L_b, [], r_B, L_i, T_ref, T_A); % cm, structural length 
   ELw = L/ del_M;                       % g, total length
   

@@ -61,9 +61,9 @@ data.Wwp = 0.0137; units.Wwp = 'g';  label.Wwp = 'wet weight at puberty';      b
 data.Wwi = 1.8158;  units.Wwi = 'g'; label.Wwi = 'ultimate dry weight';        bibkey.Wwi = 'guess';
   comment.Wwi = 'computed from Li, and specific density 1 g/cm^3';
   
-data.Ri = 18*5/365;  units.Ri = '#/d';  label.Ri = 'maximum reprod rate';     bibkey.Ri = 'Petracco2010';  
+data.Ri = 18*6/365;  units.Ri = '#/d';  label.Ri = 'maximum reprod rate';     bibkey.Ri = 'Petracco2010';  
   temp.Ri = C2K(23); units.temp.Ri = 'K'; label.temp.Ri = 'temperature';
-  comment.Ri = '18 eggs, with incubation period of two months, guessed 5 times a year'; 
+  comment.Ri = '18 eggs, with incubation period of two months, guessed 6 times a year'; 
 
 % uni-variate data
 % t-L data Fig 5 of Petracco2010:
@@ -191,7 +191,6 @@ bibkey.LN = {'Petracco2010'};
 
 %% set weights for all real data
 weights = setweights(data, []);
-weights.Ri = 1 * weights.Ri; 
 weights.tL = 8 * weights.tL;
 weights.LN = 8 * weights.LN;
 
