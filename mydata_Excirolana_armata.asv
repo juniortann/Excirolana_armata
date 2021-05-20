@@ -55,15 +55,15 @@ data.Li  = 1.2;  units.Li  = 'cm';  label.Li  = 'ultimate total length';      bi
     comment.Li = 'Largest female';
      
 data.Wwb = 0.0017; units.Wwb = 'g'; label.Wwb = 'wet weight at birth';        bibkey.Wwb = 'guess';
-  comment.Wwj = 'computed from Lj, and specific density 1 g/cm^3';
+  temp.Wwb = C2K(23); units.temp.Wwb = 'K'; comment.Wwj = 'computed from Lj, and specific density 1 g/cm^3';
 data.Wwp = 0.0137; units.Wwp = 'g';  label.Wwp = 'wet weight at puberty';      bibkey.Wwp = 'guess';
-  comment.Wwp = 'computed from Lp, and specific density 1 g/cm^3';
+  temp.Wwp = C2K(23); units.temp.Wwp = 'K'; comment.Wwp = 'computed from Lp, and specific density 1 g/cm^3';
 data.Wwi = 1.8158;  units.Wwi = 'g'; label.Wwi = 'ultimate dry weight';        bibkey.Wwi = 'guess';
-  comment.Wwi = 'computed from Li, and specific density 1 g/cm^3';
+  temp.Wwi = C2K(23); units.temp.Wwi = 'K'; comment.Wwi = 'computed from Li, and specific density 1 g/cm^3';
   
-data.Ri = 18*5/365;  units.Ri = '#/d';  label.Ri = 'maximum reprod rate';     bibkey.Ri = 'Petracco2010';  
+data.Ri = 18/60;  units.Ri = '#/d';  label.Ri = 'maximum reprod rate';     bibkey.Ri = 'Petracco2010';  
   temp.Ri = C2K(23); units.temp.Ri = 'K'; label.temp.Ri = 'temperature';
-  comment.Ri = '18 eggs, with incubation period of two months, guessed 5 times a year'; 
+  comment.Ri = '18 eggs, with incubation period of two months, guessed 4 times a year'; 
 
 % uni-variate data
 % t-L data Fig 5 of Petracco2010:
@@ -191,9 +191,9 @@ bibkey.LN = {'Petracco2010'};
 
 %% set weights for all real data
 weights = setweights(data, []);
-weights.Ri = 1 * weights.Ri; 
-weights.tL = 8 * weights.tL;
-weights.LN = 8 * weights.LN;
+weights.Ri = 01 * weights.Ri; 
+weights.tL = 03 * weights.tL;
+weights.LN = 02 * weights.LN;
 
 %% set pseudodata and respective weights
 [data, units, label, weights] = addpseudodata(data, units, label, weights);
