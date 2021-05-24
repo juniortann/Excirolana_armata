@@ -61,9 +61,9 @@ data.Wwp = 0.0137; units.Wwp = 'g';  label.Wwp = 'wet weight at puberty';      b
 data.Wwi = 1.8158;  units.Wwi = 'g'; label.Wwi = 'ultimate dry weight';        bibkey.Wwi = 'guess';
   comment.Wwi = 'computed from Li, and specific density 1 g/cm^3';
   
-data.Ri = 18*6/365;  units.Ri = '#/d';  label.Ri = 'maximum reprod rate';     bibkey.Ri = 'Petracco2010';  
+data.Ri = 18*5/365;  units.Ri = '#/d';  label.Ri = 'maximum reprod rate';     bibkey.Ri = 'Petracco2010';  
   temp.Ri = C2K(23); units.temp.Ri = 'K'; label.temp.Ri = 'temperature';
-  comment.Ri = '18 eggs, with incubation period of two months, guessed 6 times a year. Zero weight, as it wasnt explaining the data'; 
+  comment.Ri = '18 eggs, with incubation period of two months, guessed 5 times a year'; 
 
 % uni-variate data
 % t-L data Fig 5 of Petracco2010:
@@ -191,7 +191,7 @@ bibkey.LN = {'Petracco2010'};
 
 %% set weights for all real data
 weights = setweights(data, []);
-weights.Ri = 0 * weights.Ri;
+weights.Ri = 1 * weights.Ri;
 weights.tL = 8 * weights.tL;
 weights.LN = 8 * weights.LN;
 
@@ -217,12 +217,12 @@ metaData.bibkey.F2 = 'Petracco2010';
 metaData.facts = struct('F1',F1,'F2',F2);
 
 %% Links
-metaData.links.id_CoL = '3DJX6'; % Cat of Life
-metaData.links.id_EoL = '344559'; % Ency of Life
-metaData.links.id_Wiki = 'Excirolana'; % Wikipedia
-metaData.links.id_ADW = 'Excirolana_armata'; % ADW
-metaData.links.id_Taxo = ''; % Taxonomicon
-metaData.links.id_WoRMS = '258412'; % WoRMS
+% metaData.links.id_CoL = '3DJX6'; % Cat of Life
+% metaData.links.id_EoL = '1022976'; % Ency of Life
+% metaData.links.id_Wiki = 'Excirolana'; % Wikipedia
+% metaData.links.id_ADW = 'Excirolana_braziliensis'; % ADW
+% metaData.links.id_Taxo = '34155'; % Taxonomicon
+% metaData.links.id_WoRMS = '258413'; % WoRMS
 
 %% References
 bibkey = 'guess'; type = 'Misc'; bib = ... 
