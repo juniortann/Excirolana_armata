@@ -20,21 +20,21 @@ metaData.T_typical  = C2K(25); % K, body temp
 metaData.data_0     = {'ab'; 'am'; 'Lb'; 'Lp'; 'Li'; 'Wwb';  'Wwp'; 'Wwi'; 'Ri'}; 
 metaData.data_1     = {'t-L';'L-N'}; 
 
-%metaData.COMPLETE = 0.0; % using criteria of LikaKear2011
+metaData.COMPLETE = 2.5; % using criteria of LikaKear2011
 
-metaData.author   = {'Tan Tjui Yeuw'};    
+metaData.author   = {'Tan Tjui Yeuw', 'Samantha Abreu Alves dos Santos', 'Fabio Stucchi Vannucchi'};    
 metaData.date_subm = [2021 03 01];              
 metaData.email    = {'tan.tjui-yeuw@unesp.br'};            
 metaData.address  = {'São Paulo State University (UNESP)'};  
 
-metaData.author_mod_1   = {'Bas Kooijman'};    
-metaData.date_mod_1     = [2016 10 15];              
-metaData.email_mod_1    = {'bas.kooijman@vu.nl'};            
-metaData.address_mod_1  = {'VU University Amsterdam'};   
+metaData.author_mod_1   = {};    
+metaData.date_mod_1     = [];              
+metaData.email_mod_1    = {};            
+metaData.address_mod_1  = {};   
 
-metaData.curator     = {'Starrlight Augustine'};
-metaData.email_cur   = {'starrlight@akvaplan.niva.no'}; 
-metaData.date_acc    = [2016 10 15]; 
+metaData.curator     = {};
+metaData.email_cur   = {}; 
+metaData.date_acc    = []; 
 
 %% set data
 % zero-variate data
