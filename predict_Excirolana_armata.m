@@ -43,7 +43,6 @@ function [prdData, info] = predict_Excirolana_armata(par, data, auxData)
 
   %% pack to output
   prdData.ab = aT_b;
- % prdData.ap = aT_p;
   prdData.am = aT_m;
   prdData.Lb = Lw_b;
   prdData.Lp = Lw_p;

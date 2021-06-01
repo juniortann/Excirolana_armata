@@ -42,8 +42,6 @@ metaData.date_acc    = [];
 data.ab = 60;    units.ab = 'd';    label.ab = 'age at birth';                bibkey.ab = 'Petracco2010';   
   temp.ab = C2K(23);  units.temp.ab = 'K'; label.temp.ab = 'temperature';
   comment.ab = 'incubation period of two months';
-% data.ap = 45;   units.ap = 'd';    label.ap = 'age at puberty'; bibkey.ap = 'guess';
-%   temp.ap = C2K(25);  units.temp.ap = 'K'; label.temp.ap = 'temperature';
 data.am = 1.93*365; units.am = 'd';    label.am = 'life span';                   bibkey.am = 'Petracco2010';  
    temp.am = C2K(23);  units.temp.am = 'K'; label.temp.am = 'temperature'; 
 
