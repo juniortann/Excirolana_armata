@@ -16,7 +16,7 @@ metaData.ecoCode.food    = {'biS'};
 metaData.ecoCode.gender  = {'D'};
 metaData.ecoCode.reprod  = {'O'};
 
-metaData.T_typical  = C2K(25); % K, body temp
+metaData.T_typical  = C2K(20); % K, body temp
 metaData.data_0     = {'ab'; 'am'; 'Lb'; 'Lp'; 'Li'; 'Wwb';  'Wwp'; 'Wwi'; 'Ri'}; 
 metaData.data_1     = {'t-L';'L-N'}; 
 
@@ -26,11 +26,6 @@ metaData.author   = {'Tan Tjui Yeuw', 'Samantha Abreu Alves dos Santos', 'Fabio 
 metaData.date_subm = [2021 03 01];              
 metaData.email    = {'tan.tjui-yeuw@unesp.br'};            
 metaData.address  = {'São Paulo State University (UNESP)'};  
-
-metaData.author_mod_1   = {};    
-metaData.date_mod_1     = [];              
-metaData.email_mod_1    = {};            
-metaData.address_mod_1  = {};   
 
 metaData.curator     = {};
 metaData.email_cur   = {}; 
@@ -59,9 +54,9 @@ data.Wwp = 0.0137; units.Wwp = 'g';  label.Wwp = 'wet weight at puberty';      b
 data.Wwi = 1.8158;  units.Wwi = 'g'; label.Wwi = 'ultimate dry weight';        bibkey.Wwi = 'guess';
   comment.Wwi = 'computed from Li, and specific density 1 g/cm^3';
   
-data.Ri = 18*6/365;  units.Ri = '#/d';  label.Ri = 'maximum reprod rate';     bibkey.Ri = 'Petracco2010';  
-  temp.Ri = C2K(23); units.temp.Ri = 'K'; label.temp.Ri = 'temperature';
-  comment.Ri = '18 eggs, with incubation period of two months, guessed 6 times a year. Zero weight, as it wasnt explaining the data'; 
+data.Ri = 39*5/365;  units.Ri = '#/d';  label.Ri = 'maximum reprod rate';     bibkey.Ri = 'LozoyaDefeo2006';  
+  temp.Ri = C2K(17); units.temp.Ri = 'K'; label.temp.Ri = 'temperature';
+  comment.Ri = 'guessed 5 times a year'; 
 
 % uni-variate data
 % t-L data Fig 5 of Petracco2010:
@@ -112,7 +107,8 @@ bibkey.tL = {'Petracco2010'};
 comment.tL = 'Adult';
  
  % length - clutch size
-data.LN = [ ... % body length (mm), n of embryos (#)
+    % Brazil
+data.LN_br = [ ... % body length (mm), n of embryos (#)
 2.39 8.19
 2.44 7.33
 2.5 5.09
@@ -181,17 +177,269 @@ data.LN = [ ... % body length (mm), n of embryos (#)
 6.98 17.67
 7.05 15.78
 ];
-data.LN(:,1) = data.LN(:,1)/10; % convert mm to cm
-units.LN   = {'cm', '#'};  label.LN = {'body length', 'embryos'};  
-temp.LN   = C2K(23);  units.temp.LN = 'K'; label.temp.LN = 'temperature';
-bibkey.LN = {'Petracco2010'};
+data.LN_br(:,1) = data.LN_br(:,1)/10; % convert mm to cm
+units.LN_br   = {'cm', '#'};  label.LN_br = {'body length', 'embryos'};  
+temp.LN_br   = C2K(23);  units.temp.LN_br = 'K'; label.temp.LN_br = 'temperature';
+bibkey.LN_br = {'Petracco2010'};
+
+    % Uruguai
+data.LN_ur = [ ... % body length (mm), n of embryos (#)
+2.7	5.1
+3.8	2.0
+3.2	11.0
+3.4	10.9
+3.6	6.1
+3.8	6.0
+3.9	6.1
+4.1	6.2
+4.2	6.1
+4.1	5.4
+4.2	3.9
+4.4	4.9
+4.5	5.8
+4.9	5.0
+4.1	6.8
+3.9	7.8
+3.7	8.9
+3.9	8.6
+3.8	10.0
+4.0	11.2
+4.1	12.0
+4.3	11.8
+4.1	10.0
+3.9	9.2
+4.1	9.1
+4.0	8.1
+4.2	8.1
+4.4	8.0
+4.4	8.9
+4.4	10.0
+4.3	15.5
+4.4	13.9
+4.4	12.0
+4.6	11.8
+4.7	10.3
+4.7	8.3
+4.8	7.3
+4.8	9.1
+5.2	6.9
+5.3	5.9
+5.9	3.2
+5.2	7.9
+5.4	7.9
+5.4	9.0
+5.6	9.0
+5.2	11.0
+5.0	11.9
+4.8	12.1
+4.7	12.0
+4.7	13.1
+4.9	13.2
+5.0	13.1
+4.7	15.1
+4.8	14.9
+4.8	16.2
+4.7	16.0
+4.7	17.1
+5.0	14.9
+5.3	13.9
+5.3	15.1
+5.3	12.0
+5.4	12.1
+5.4	11.0
+5.6	10.8
+5.8	9.7
+5.6	11.9
+5.9	12.0
+6.2	11.0
+6.3	12.1
+6.0	13.0
+6.2	13.1
+5.9	12.9
+5.9	14.3
+5.7	14.0
+5.7	13.0
+5.5	13.0
+5.5	13.8
+5.6	15.0
+5.1	16.8
+5.3	17.9
+5.1	19.7
+5.4	20.1
+5.4	19.0
+5.6	18.9
+5.6	18.2
+5.6	17.0
+5.7	17.0
+5.9	16.8
+5.7	16.1
+5.8	15.2
+6.0	15.1
+6.3	16.3
+6.5	16.1
+6.6	16.0
+6.5	15.2
+6.8	14.0
+6.8	8.2
+6.2	16.8
+6.1	18.3
+6.1	18.0
+5.9	18.2
+5.8	19.3
+6.0	18.9
+6.0	19.9
+5.8	20.0
+5.8	21.0
+5.9	21.0
+5.7	23.1
+7.2	12.9
+7.4	12.9
+6.9	14.9
+7.1	15.1
+7.4	15.3
+7.7	14.8
+7.0	15.9
+6.9	16.9
+6.8	16.9
+6.9	18.0
+7.4	17.0
+7.4	18.0
+7.3	18.0
+7.2	19.1
+7.1	19.0
+6.9	19.0
+6.7	19.0
+6.5	18.0
+6.3	18.9
+6.3	20.0
+6.2	19.9
+6.5	19.7
+6.6	19.8
+6.1	22.0
+6.1	21.9
+6.3	21.8
+6.2	21.0
+6.3	21.1
+6.5	21.0
+6.6	20.9
+6.8	21.4
+6.9	21.0
+7.0	21.0
+6.8	19.6
+6.9	19.9
+7.0	19.9
+7.4	19.6
+7.5	21.1
+7.8	19.7
+8.2	18.1
+7.0	22.5
+6.7	21.8
+6.6	22.0
+6.4	22.9
+6.6	22.8
+6.6	23.9
+6.8	23.9
+6.8	24.9
+6.6	24.9
+6.4	25.2
+6.3	26.2
+6.2	28.1
+6.6	27.1
+6.8	26.9
+6.9	23.1
+7.3	21.2
+7.3	21.9
+7.5	22.2
+7.7	22.0
+7.9	22.1
+8.1	22.0
+8.4	22.2
+7.9	20.9
+8.8	21.4
+9.2	21.2
+8.0	23.2
+7.7	22.8
+7.5	22.9
+7.3	23.1
+7.2	24.1
+7.4	24.0
+7.6	24.0
+7.8	25.0
+7.6	24.6
+7.3	24.7
+7.4	25.7
+7.2	26.0
+8.0	25.3
+8.3	24.8
+8.6	24.1
+8.9	24.1
+8.6	25.7
+8.3	26.9
+8.4	26.0
+8.0	26.9
+8.0	26.0
+8.0	27.0
+7.8	27.0
+7.7	27.0
+7.4	27.0
+7.7	25.9
+7.8	25.9
+7.1	27.9
+7.3	28.6
+6.9	28.8
+7.1	30.7
+7.1	32.2
+10.2	25.4
+8.1	27.8
+8.1	29.2
+8.3	29.1
+8.4	29.1
+8.9	29.1
+8.8	28.2
+9.1	27.9
+9.3	27.9
+9.6	29.2
+9.2	29.1
+9.0	29.0
+8.8	30.5
+8.7	30.2
+8.3	30.2
+8.2	30.9
+8.1	31.9
+8.0	32.0
+7.7	31.7
+8.2	33.2
+7.8	34.1
+9.6	29.1
+9.5	30.9
+9.6	31.9
+9.0	33.0
+9.1	34.1
+9.0	34.2
+8.7	32.6
+8.7	33.7
+8.6	34.8
+8.4	36.2
+8.2	37.9
+7.7	37.0
+8.8	39.1
+9.0	36.8
+9.2	35.9
+9.6	37.8
+9.6	38.7
+10.2	35.3
+10.2	33.9
+11.5	38.1
+];
+data.LN_ur(:,1) = data.LN_ur(:,1)/10; % convert mm to cm
+units.LN_ur   = {'cm', '#'};  label.LN_ur = {'body length', 'embryos'};  
+temp.LN_ur   = C2K(17);  units.temp.LN_ur = 'K'; label.temp.LN_ur = 'temperature';
+bibkey.LN_ur = {'LozoyaDefeo2006'};
 
 
 %% set weights for all real data
 weights = setweights(data, []);
-weights.Ri = 0 * weights.Ri;
 weights.tL = 8 * weights.tL;
-weights.LN = 8 * weights.LN;
 
 %% set pseudodata and respective weights
 [data, units, label, weights] = addpseudodata(data, units, label, weights);
@@ -238,13 +486,23 @@ bibkey = 'Petracco2010'; type = 'Article'; bib = [ ...
 metaData.biblist.(bibkey) = ['''@', type, '{', bibkey, ', ' bib, '}'';'];
 %
 bibkey = 'ThompsonSanchezdeBock2007'; type = 'Article'; bib = [ ...  
-'author = {G. A. Thompson1 and M. Sánchez de Bock}, ' ...
+'author = {G. A. Thompson and M. Sánchez de Bock}, ' ...
 'year = {2007}, ' ...
-'title  = {Population dynamics of Excirolana armata (Isopoda: Cirolanidae) in Buenos Aires beaches, Argentina ' ...
+'title  = {Population dynamics of Excirolana armata (Isopoda: Cirolanidae) in Buenos Aires beaches, Argentina}, ' ...
 'journal = {Revista de Biologia Tropical}, ' ...
 'pages = {131–140}, ' ...
 'volume = {55}, ' ...
 'howpublished = {\url{htaps://revistas.ucr.ac.cr/index.php/rbt/article/view/5813}}'];
+metaData.biblist.(bibkey) = ['''@', type, '{', bibkey, ', ' bib, '}'';'];
+%
+bibkey = 'LozoyaDefeo2006'; type = 'Article'; bib = [ ...  
+'author = {Juan Pablo Lozoya and Omar Defeo}, ' ...
+'year = {2006}, ' ...
+'title  = {Effects of a freshwater canal discharge on an ovoviviparous isopod inhabiting an exposed sandy beach}, ' ...
+'journal = {Marine and Freshwater Research}, ' ...
+'pages = {421–428}, ' ...
+'volume = {57}, ' ...
+'howpublished = {\url{https://www.publish.csiro.au/mf/mf05067}}'];
 metaData.biblist.(bibkey) = ['''@', type, '{', bibkey, ', ' bib, '}'';'];
 %
 bibkey = 'Kooy2010'; type = 'Book'; bib = [ ...  % used in setting of chemical parameters and pseudodata

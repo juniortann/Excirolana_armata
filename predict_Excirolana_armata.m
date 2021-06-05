@@ -6,6 +6,7 @@ function [prdData, info] = predict_Excirolana_armata(par, data, auxData)
   
   %% compute temperature correction factors
   TC = tempcorr(temp.am, T_ref, T_A); kT_M = k_M * TC;
+  TC_ur = tempcorr(temp.Ri, T_ref, T_A); kT_M_ur = k_M * TC;
   
   %% zero-variate data
 
@@ -32,8 +33,8 @@ function [prdData, info] = predict_Excirolana_armata(par, data, auxData)
   Ww_i = L_i^3 * (1 + f * w);       % g, ultimate wet weight (remove d_V for wet weight)
  
   % reproduction
-  pars_R = [kap; kap_R; g; k_J; k_M; L_T; v; U_Hb; U_Hp]; % compose parameter vector at T
-  RT_i = TC * reprod_rate(L_i, f, pars_R);             % #/d, ultimate reproduction rate at T
+  pars_R_ur = [kap; kap_R; g; k_J; kT_M_ur; L_T; v; U_Hb; U_Hp]; % compose parameter vector at T
+  RT_i = TC * reprod_rate(L_i, f, pars_R_ur);             % #/d, ultimate reproduction rate at T
 
   % life span
   pars_tm = [g; l_T; h_a/ k_M^2; s_G];  % compose parameter vector at T_ref
@@ -55,19 +56,29 @@ function [prdData, info] = predict_Excirolana_armata(par, data, auxData)
   %% uni-variate data
   % time-length
   [t_p, t_b, l_p, l_b] = get_tp(pars_tp, f);
-  r_B = k_M/ 3/ (1 + f/ g);  L_i = L_m * f; L_b = L_m * l_b;      
-  [t L] = ode45(@get_L, tL(:,1), L_b, [], r_B, L_i, T_ref, T_A); % cm, structural length 
+  rT_B = kT_M/ 3/ (1 + f/ g);  L_i = L_m * f; L_b = L_m * l_b;      
+  [t L] = ode45(@get_L, tL(:,1), L_b, [], rT_B, L_i, T_ref, T_A); % cm, structural length 
   ELw = L/ del_M;                       % g, total length
   
+  
   % L-N data
-  EN = TC * reprod_rate (LN(:,1) * del_M, f, pars_R) * 365/ 6;  % #/d, clutch size for spawning six times per yr (every two months)
+  
+    % Brazil
+  pars_R_br = [kap; kap_R; g; k_J; kT_M; L_T; v; U_Hb; U_Hp]; % compose parameter vector at T
+  EN_br = TC * reprod_rate (LN_br(:,1) * del_M, f, pars_R_br) * 365/ 5;  % #/d, clutch size for spawning five times per yr (every two months)
+  
+    % Uruguai
+  EN_ur = TC * reprod_rate (LN_ur(:,1) * del_M, f, pars_R_ur) * 365/ 5;  % #/d, clutch size for spawning five times per yr (every two months)
+  
 
   %% pack to output
   prdData.tL = ELw;  
-  prdData.LN = EN;
+  prdData.LN_br = EN_br;
+  prdData.LN_ur = EN_ur;
   
 end
+
 function dL = get_L(t, L, r_B, L_i, T_ref, T_A)
-  TC = tempcorr(C2K(27+7*sin(2*pi*(t+10)/365)), T_ref, T_A); 
+  TC = tempcorr(C2K(23+4*sin(2*pi*(t+10)/365)), T_ref, T_A); 
   dL = TC * r_B * (L_i - L);
 end
