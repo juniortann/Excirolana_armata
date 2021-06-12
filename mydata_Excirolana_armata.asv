@@ -60,7 +60,7 @@ data.Ri = 39*5/365;  units.Ri = '#/d';  label.Ri = 'maximum reprod rate';     bi
 
 % uni-variate data
 % t-L data Fig 5 of Petracco2010:
-data.tL_br = [ ... % time since birth (years), body length (mm)
+data.tL = [ ... % time since birth (years), body length (mm)
 0.092,1.228
 0.12,1.576
 0.139,1.95
@@ -99,12 +99,12 @@ data.tL_br = [ ... % time since birth (years), body length (mm)
 1.227,7.264
 1.31,7.691
  ];
-data.tL_br(:,1) = data.tL_br(:,1)*365; % convert year to day
-data.tL_br(:,2) = data.tL_br(:,2)/10; % convert mm to cm
-units.tL_br  = {'d', 'cm'};  label.tL_br = {'time', 'body length'};  
-temp.tL_br   = C2K(23);  units.temp.tL_br = 'K'; label.temp.tL_br = 'temperature';
-bibkey.tL_br = {'Petracco2010'};
-comment.tL_br = 'Adult, extracted from a plot (Fig 5) manually';
+data.tL(:,1) = data.tL(:,1)*365; % convert year to day
+data.tL(:,2) = data.tL(:,2)/10; % convert mm to cm
+units.tL  = {'d', 'cm'};  label.tL = {'time', 'body length'};  
+temp.tL   = C2K(23);  units.temp.tL = 'K'; label.temp.tL = 'temperature';
+bibkey.tL = {'Petracco2010'};
+comment.tL = 'Adult, extracted from a plot (Fig 5) manually';
  
  % length - clutch size
     % Brazil
@@ -133,7 +133,7 @@ comment.LN_ur = 'Uruguay';
 
 %% set weights for all real data
 weights = setweights(data, []);
-weights.tL_br = 3 * weights.tL_br;
+weights.tL = 3 * weights.tL;
 weights.Wwb = 0.7 * weights.Wwb; weights.Wwp = 0.7 * weights.Wwp; 
 weights.Wwi = 0.7 * weights.Wwi; %reduce weights of Ww a bit, because no data
 
@@ -150,11 +150,10 @@ txtData.comment = comment;
 %% Discussion points
 D1 = 'Males are assumed to have the same parameters as females';     
 D2 = 'Data mostly for Brazil and Uruguay, Uruguay assumed to have a lower food abundance';
-D3 = 'tL_br data modeled with a sinusoid temp fluctuation';
+D3 = 'tL data modeled with a sinusoid temp fluctuation';
 metaData.discussion = struct('D1', D1, 'D2', D2, 'D3', D3);
 
 %% Facts
-
 
 %% Links
 metaData.links.id_CoL = '3DJX6'; % Cat of Life
