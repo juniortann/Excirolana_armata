@@ -65,36 +65,21 @@ function [prdData, info] = predict_Excirolana_armata(par, data, auxData)
   prdData.Ri = RT_i;
   
   %% uni-variate data
-  % time-length
-   [tau_p, tau_b, l_p, l_b] = get_tp(pars_tp, f_br);  % use scaled functional response for Brazil
-  r_B = k_M/ 3/ (1 + f_br/ g);  L_i = L_m * f_br; L_b = L_m * l_b;      
-  [t L] = ode45(@get_L, tL_br(:,1), L_b, [], r_B, L_i, T_ref, T_A, temp.tL_br); % cm, structural length 
-  ELw = L/ del_M;                       % g, total length
-    
-  % L-N data
+  % time-length  
+  rT_B = TC_br * k_M/ 3/ (1 + f_br/ g); L_i = f_br * L_m; L_b = L_m * get_lb([g; k; v_Hb], f_br);
+  ELw_br = (L_i - (L_i - L_b) * exp(- rT_B * tL_br(:,1)))/ del_M;
+
+  % L-N
    % Brazil
-  pars_R = [kap; kap_R; g; k_J; k_M; L_T; v; U_Hb; U_Hp]; % compose parameter vector at T
-  [L N] = ode45(@get_N, LN_br(:,1), L_p, [], 
   EN_br = TC_br * reprod_rate (LN_br(:,1) * del_M, f_br, pars_R) * 365/ 5;  % #/d, clutch size for spawning five times per yr (every two months)
   
-    % Uruguai
+   % Uruguai
   EN_ur = TC_ur * reprod_rate (LN_ur(:,1) * del_M, f_ur, pars_R) * 365/ 5;  % #/d, clutch size for spawning five times per yr (every two months)
   
 
-  %% pack to output
-  prdData.tL_br = ELw;  
+  %% pack to output  prdData.tL_br = ELw;  
+  prdData.tL_br = ELw_br;
   prdData.LN_br = EN_br;
   prdData.LN_ur = EN_ur;
   
-end
-
- 
-function dL = get_L(t, L, r_B, L_i, T_ref, T_A, T_tL)
-TC = tempcorr(T_tL+4*sin(2*pi*(t+10)/365), T_ref, T_A); 
-  dL = TC * r_B * (L_i - L);
-end
-
-function dN = get_N(L, N, r_B, L_i, T_ref, T_A, T_LN)
-TC = tempcorr(T_LN+4*sin(2*pi*(t+10)/365), T_ref, T_A);
-  EN_br = TC_br * reprod_rate (LN_br(:,1) * del_M, f_br, pars_R) * 365/ 5; dL = TC * r_B * (L_i - L);
 end
